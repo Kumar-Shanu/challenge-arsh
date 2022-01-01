@@ -1,0 +1,46 @@
+class Solution {
+public:
+    string gcdOfStrings(string str1, string str2) {
+        if(str1.size()<str2.size())
+            return gcdOfStrings(str2,str1);
+        int s1 = str1.size();
+        int temp = str2.size();
+        string temps = str2;
+        while(1)
+        {
+            int s2 = str2.size();
+            if(!s2)
+                return "";
+            if(s1%s2 || temp%s2)
+            {
+                str2.pop_back();
+                continue;
+            }
+            int f = 0;
+            for(int i=0;i<s1;i+=s2)
+            {
+                if(str1.substr(i,s2)!=str2)
+                {
+                    str2.pop_back();
+                    f = 1;
+                    break;
+                }
+            }
+            if(f)
+                continue;
+            for(int i=0;i<temp;i+=s2)
+            {
+                if(temps.substr(i,s2)!=str2)
+                {
+                    str2.pop_back();
+                    f = 1;
+                    break;
+                }
+            }
+            if(f)
+                continue;
+            return str2;
+        }
+        return "";
+    }
+};
